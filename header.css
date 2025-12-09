@@ -1,56 +1,179 @@
-/* Simple styling for test */
-.sxm-header {
-  background: #0a0f14;
-  padding: 14px 24px;
+/* header.css */
+
+/* Shell to scope styles so they don't fight Salesforce */
+.sx-shell {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Top bar */
+.sx-header {
+  background: #04070b;
+  color: #fff;
+  position: relative;
+  z-index: 50;
+}
+
+.sx-header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 32px;
 }
 
-.sxm-logo {
-  color: white;
-  font-size: 26px;
-  font-weight: bold;
-  margin-right: 48px;
+.sx-logo {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fff;
+  text-decoration: none;
 }
 
-.sxm-nav ul {
+/* Primary nav */
+.sx-primary-nav {
+  flex: 1 1 auto;
+}
+
+.sx-primary-list {
+  display: flex;
+  gap: 32px;
+  list-style: none;
   margin: 0;
   padding: 0;
-  list-style: none;
 }
 
-.sxm-menu {
-  display: flex;
-  gap: 24px;
-}
-
-.menu-item {
+.sx-primary-item {
   position: relative;
 }
 
-.menu-item a {
-  color: white;
+.sx-primary-link {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  color: #fff;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.sx-primary-link span:first-child {
+  pointer-events: none;
+}
+
+/* Underline animation */
+.sx-underline {
+  display: block;
+  height: 2px;
+  width: 0;
+  background: #3cf2ff;
+  transition: width 150ms ease-out;
+}
+
+.sx-primary-item.sx-is-active .sx-underline,
+.sx-primary-link:hover .sx-underline,
+.sx-primary-link:focus-visible .sx-underline {
+  width: 100%;
+}
+
+/* Utility nav */
+.sx-utility-list {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sx-utility-link {
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.9;
+}
+
+.sx-utility-link:hover,
+.sx-utility-link:focus-visible {
+  opacity: 1;
+}
+
+/* Mega shell */
+.sx-mega-shell {
+  position: relative;
+  z-index: 40;
+}
+
+/* Panel base */
+.sx-mega-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: #050a0f;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  display: none;          /* controlled by JS */
+}
+
+.sx-mega-panel.sx-open {
+  display: block;
+}
+
+.sx-mega-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 24px 32px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.sx-mega-column {
+  min-width: 0;
+}
+
+.sx-mega-heading {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0 0 12px;
+  opacity: 0.7;
+}
+
+.sx-mega-link {
+  display: block;
+  color: #fff;
   text-decoration: none;
   padding: 6px 0;
+  font-size: 15px;
 }
 
-.dropdown {
-  display: none;
-  position: absolute;
-  top: 34px;
-  left: 0;
-  background: #0f151a;
-  padding: 12px 0;
-  list-style: none;
-  min-width: 200px;
+.sx-mega-link:hover,
+.sx-mega-link:focus-visible {
+  text-decoration: underline;
 }
 
-.dropdown li a {
-  display: block;
-  padding: 8px 16px;
-  color: white;
-}
+/* Simple mobile collapse (optional) */
+@media (max-width: 768px) {
+  .sx-header-inner {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
 
-.dropdown li a:hover {
-  background: rgba(255,255,255,0.1);
+  .sx-primary-list {
+    gap: 16px;
+    font-size: 14px;
+  }
+
+  .sx-mega-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
