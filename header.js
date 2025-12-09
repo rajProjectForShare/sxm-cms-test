@@ -1,17 +1,52 @@
-// Test script to confirm CMS Connect JS loads correctly
-console.log("🚀 Sirius Header JS Loaded");
+// header.js
 
-// Make sure DOM is ready
-$(document).ready(function () {
-  console.log("✔ jQuery ready inside CMS Header");
+console.log("🚀 [CMS HEADER] script loaded");
 
-  // Show dropdown on hover
-  $(".menu-item").hover(
-    function () {
-      $(this).find(".dropdown").stop(true, true).slideDown(150);
-    },
-    function () {
-      $(this).find(".dropdown").stop(true, true).slideUp(150);
+(function () {
+  // Guard in case jQuery failed
+  if (typeof window.jQuery === "undefined") {
+    console.error("❌ [CMS HEADER] jQuery is not available.");
+    return;
+  }
+
+  var $ = window.jQuery;
+  console.log("✔ [CMS HEADER] jQuery version:", $.fn.jquery);
+
+  function closeAllPanels() {
+    $(".sx-primary-item.sx-is-active").removeClass("sx-is-active");
+    $(".sx-mega-panel.sx-open").removeClass("sx-open");
+  }
+
+  function openPanel(key) {
+    closeAllPanels();
+    if (!key) return;
+
+    $('.sx-primary-item[data-mega="' + key + '"]').addClass("sx-is-active");
+    $('.sx-mega-panel[data-panel="' + key + '"]').addClass("sx-open");
+  }
+
+  // Click / hover handlers
+  $(document).on("mouseenter", ".sx-primary-item.sx-has-mega", function () {
+    var key = $(this).data("mega");
+    openPanel(key);
+  });
+
+  $(document).on("mouseleave", ".sx-shell", function () {
+    // When pointer leaves the entire header shell, close
+    closeAllPanels();
+  });
+
+  // Keyboard focus support
+  $(document).on("focusin", ".sx-primary-item.sx-has-mega .sx-primary-link", function () {
+    var key = $(this).closest(".sx-primary-item").data("mega");
+    openPanel(key);
+  });
+
+  $(document).on("keydown", function (evt) {
+    if (evt.key === "Escape") {
+      closeAllPanels();
     }
-  );
-});
+  });
+
+  console.log("✅ [CMS HEADER] mega menu initialized");
+})();
