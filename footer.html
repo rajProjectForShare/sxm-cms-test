@@ -1,92 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>External Footer Test</title>
-
-    <!-- Tailwind again (same CDN) -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-    />
-
-    <style>
-      body {
-        margin: 0;
-        background: #0b1120;
-        color: #e5e7eb;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-          sans-serif;
-      }
-
-      .sx-footer-root {
-        background: #020617;
-        padding: 32px 0 20px;
-      }
-
-      .sx-footer-link {
-        font-size: 13px;
-        color: #9ca3af;
-        text-decoration: none;
-        display: block;
-        padding: 2px 0;
-      }
-
-      .sx-footer-link:hover {
-        color: #f9fafb;
-      }
-
-      .sx-footer-heading {
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: #6b7280;
-        margin-bottom: 8px;
-      }
-    </style>
-  </head>
-
-  <body>
-    <footer class="sx-footer-root">
-      <div class="max-w-5xl mx-auto px-6">
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 mb-6">
-          <div>
-            <div class="sx-footer-heading">SiriusXM</div>
-            <a href="#" class="sx-footer-link">About us</a>
-            <a href="#" class="sx-footer-link">Careers</a>
-            <a href="#" class="sx-footer-link">Newsroom</a>
-          </div>
-          <div>
-            <div class="sx-footer-heading">Support</div>
-            <a href="#" class="sx-footer-link">Contact us</a>
-            <a href="#" class="sx-footer-link">Help &amp; FAQs</a>
-            <a href="#" class="sx-footer-link">Manage account</a>
-          </div>
-          <div>
-            <div class="sx-footer-heading">Legal</div>
-            <a href="#" class="sx-footer-link">Terms &amp; conditions</a>
-            <a href="#" class="sx-footer-link">Privacy policy</a>
-            <a href="#" class="sx-footer-link">Cookie policy</a>
-          </div>
-        </div>
-
-        <div class="flex items-center justify-between text-xs text-gray-500">
-          <span>© 2025 SiriusXM Test Footer</span>
-          <button
-            class="border border-gray-600 rounded px-2 py-1 hover:bg-gray-800"
-            onclick="alert('Inline footer onclick (blocked if strict CSP).')"
-          >
-            Inline onclick test
-          </button>
-        </div>
-      </div>
-    </footer>
-
-    <!-- Optional: external JS just to mirror header setup -->
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-      // Very small inline script to mark that footer JS ran
-      console.log("Footer inline JS executed (if visible in console).");
-    </script>
-  </body>
-</html>
+<!-- footer.html -->
+<footer class="sx-footer">
+  <div class="sx-footer-inner">
+    <p class="sx-footer-copy">© 2024 SiriusXM – Test CMS Footer</p>
+    <nav class="sx-footer-nav" aria-label="Footer">
+      <a href="#" class="sx-footer-link">Privacy</a>
+      <a href="#" class="sx-footer-link">Terms</a>
+      <a href="#" class="sx-footer-link">Contact</a>
+    </nav>
+  </div>
+</footer>
