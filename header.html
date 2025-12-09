@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>External Header Test</title>
+
+    <!-- External CSS: Tailwind -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+    />
+
+    <style>
+      /* Page bg just so we see overlay */
+      body {
+        margin: 0;
+        background: #f3f4f6;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+      }
+
+      /* Header base */
+      .sx-header-root {
+        background: #050b13;
+        color: #ffffff;
+        position: relative;
+        z-index: 40;
+      }
+
+      .sx-header-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .sx-logo {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+      }
+
+      .sx-main-nav {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        font-size: 15px;
+      }
+
+      .sx-main-nav li {
+        list-style: none;
+      }
+
+      .sx-main-link {
+        position: relative;
+        padding-bottom: 4px;
+        cursor: pointer;
+        text-decoration: none;
+        color: #ffffff;
+        font-weight: 500;
+      }
+
+      .sx-main-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 2px;
+        width: 0;
+        background: #ffffff;
+        transition: width 0.18s ease-out;
+      }
+
+      .sx-nav-item:hover .sx-main-link::after {
+        width: 100%;
+      }
+
+      .sx-utility-nav {
+        display: flex;
+        gap: 18px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .sx-utility-link {
+        text-decoration: none;
+        color: #ffffff;
+      }
+
+      /* Mega menu */
+      .sx-mega {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        background: #050b13;
+        padding: 20px 0 32px;
+        display: none;
+      }
+
+      .sx-nav-item:hover .sx-mega {
+        display: block;
+      }
+
+      .sx-mega-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 16px;
+      }
+
+      .sx-mega-title {
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #9ca3af;
+        margin-bottom: 8px;
+      }
+
+      .sx-mega-link {
+        color: #ffffff;
+        text-decoration: none;
+        padding: 2px 0;
+      }
+
+      .sx-mega-link:hover {
+        text-decoration: underline;
+      }
+
+      /* Status pill to see JS / CSP behaviour */
+      .sx-status-pill {
+        font-size: 10px;
+        padding: 2px 8px;
+        border-radius: 9999px;
+        background: #fbbf24;
+        color: #1f2937;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="sx-header-root">
+      <div class="sx-header-inner">
+        <div class="flex items-center space-x-3">
+          <div class="sx-logo">SiriusXM</div>
+          <span id="jsStatus" class="sx-status-pill">JS: UNKNOWN</span>
+        </div>
+
+        <nav class="flex items-center gap-16">
+          <ul class="sx-main-nav">
+            <!-- What's On -->
+            <li class="sx-nav-item">
+              <a class="sx-main-link" href="javascript:void(0)">What’s on</a>
+              <div class="sx-mega">
+                <div class="sx-mega-inner">
+                  <div class="sx-mega-title">What’s on</div>
+                  <a class="sx-mega-link" href="#">What’s new</a>
+                  <a class="sx-mega-link" href="#">Channel guide</a>
+                  <a class="sx-mega-link" href="#">Program schedule</a>
+                  <a class="sx-mega-link" href="#">Live sports schedule</a>
+                  <a class="sx-mega-link" href="#">Podcasts</a>
+                  <a class="sx-mega-link" href="#">Backstage</a>
+                  <a class="sx-mega-link" href="#">SiriusXM blog</a>
+                </div>
+              </div>
+            </li>
+
+            <!-- Discover -->
+            <li class="sx-nav-item">
+              <a class="sx-main-link" href="javascript:void(0)">Discover</a>
+              <div class="sx-mega">
+                <div class="sx-mega-inner">
+                  <div class="sx-mega-title">Discover</div>
+                  <a class="sx-mega-link" href="#">What is SiriusXM?</a>
+                  <a class="sx-mega-link" href="#">Music</a>
+                  <a class="sx-mega-link" href="#">Sports</a>
+                  <a class="sx-mega-link" href="#">Howard Stern</a>
+                  <a class="sx-mega-link" href="#">News &amp; Issues</a>
+                  <a class="sx-mega-link" href="#">Talk &amp; Entertainment</a>
+                  <a class="sx-mega-link" href="#">Comedy</a>
+                </div>
+              </div>
+            </li>
+
+            <!-- Try SiriusXM -->
+            <li class="sx-nav-item">
+              <a class="sx-main-link" href="javascript:void(0)">Try SiriusXM</a>
+              <div class="sx-mega">
+                <div class="sx-mega-inner">
+                  <div class="sx-mega-title">Try SiriusXM</div>
+                  <a class="sx-mega-link" href="#">Free trial: In my car</a>
+                  <a class="sx-mega-link" href="#">Free trial: SiriusXM app</a>
+                  <a class="sx-mega-link" href="#">About your trial</a>
+                  <a class="sx-mega-link" href="#">Ways to listen</a>
+                  <a class="sx-mega-link" href="#">Get started</a>
+                </div>
+              </div>
+            </li>
+
+            <!-- Subscribe (no mega) -->
+            <li class="sx-nav-item">
+              <a class="sx-main-link" href="#">Subscribe</a>
+            </li>
+          </ul>
+
+          <ul class="sx-utility-nav">
+            <li><a class="sx-utility-link" href="#">LISTEN</a></li>
+            <li><a class="sx-utility-link" href="#">HELP</a></li>
+            <li><a class="sx-utility-link" href="#">FR</a></li>
+            <li><a class="sx-utility-link" href="#">MY ACCOUNT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Dummy body just to see overlay -->
+    <main class="max-w-3xl mx-auto px-6 py-10 text-gray-800 text-sm">
+      <p>
+        This is just filler content so you can see the dark mega-navigation
+        overlapping the page when you hover over “What’s on”, “Discover”, or
+        “Try SiriusXM”.
+      </p>
+    </main>
+
+    <!-- External JS: jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Inline JS: will be blocked in strict CSP -->
+    <script>
+      (function () {
+        var pill = document.getElementById("jsStatus");
+        if (!pill) return;
+
+        if (typeof jQuery === "undefined") {
+          pill.textContent = "JS: jQuery NOT loaded";
+          pill.style.backgroundColor = "#fecaca"; // red-100
+        } else {
+          pill.textContent = "JS: jQuery loaded (inline script ran)";
+          pill.style.backgroundColor = "#bbf7d0"; // green-100
+        }
+      })();
+    </script>
+  </body>
+</html>
