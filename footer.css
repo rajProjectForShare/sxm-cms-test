@@ -1,0 +1,27 @@
+.sx-footer {
+  background: #020509;
+  color: #9ba3ad;
+  padding: 16px 24px;
+}
+
+.sx-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.sx-footer-link {
+  color: #b8c0cc;
+  text-decoration: none;
+  margin-left: 16px;
+}
+
+.sx-footer-link:hover,
+.sx-footer-link:focus-visible {
+  color: #ffffff;
+  text-decoration: underline;
+}
