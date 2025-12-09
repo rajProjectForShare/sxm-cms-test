@@ -1,0 +1,56 @@
+/* Simple styling for test */
+.sxm-header {
+  background: #0a0f14;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+}
+
+.sxm-logo {
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  margin-right: 48px;
+}
+
+.sxm-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sxm-menu {
+  display: flex;
+  gap: 24px;
+}
+
+.menu-item {
+  position: relative;
+}
+
+.menu-item a {
+  color: white;
+  text-decoration: none;
+  padding: 6px 0;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 34px;
+  left: 0;
+  background: #0f151a;
+  padding: 12px 0;
+  list-style: none;
+  min-width: 200px;
+}
+
+.dropdown li a {
+  display: block;
+  padding: 8px 16px;
+  color: white;
+}
+
+.dropdown li a:hover {
+  background: rgba(255,255,255,0.1);
+}
