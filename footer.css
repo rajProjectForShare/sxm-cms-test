@@ -1,27 +1,164 @@
+/* Footer base */
 .sx-footer {
-  background: #020509;
-  color: #9ba3ad;
-  padding: 16px 24px;
+  background: #ffffff;
+  color: #111111;
+  padding: 40px 24px 32px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.sx-footer-inner {
+.sx-footer-top {
   max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: center;
-  font-size: 13px;
+  margin: 0 auto 32px;
+}
+
+.sx-footer-columns {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 32px;
+}
+
+.sx-footer-col {
+  min-width: 0;
+}
+
+.sx-footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .sx-footer-link {
-  color: #b8c0cc;
+  display: inline-block;
+  padding: 4px 0;
+  font-size: 15px;
+  color: #111111;
   text-decoration: none;
-  margin-left: 16px;
 }
 
 .sx-footer-link:hover,
 .sx-footer-link:focus-visible {
-  color: #ffffff;
   text-decoration: underline;
+}
+
+/* Support + social column */
+.sx-footer-col-support {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sx-footer-social {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.sx-social-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid #111111;
+  background: transparent;
+  font-size: 12px;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* App download row */
+.sx-footer-app {
+  max-width: 1200px;
+  margin: 0 auto 24px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15px;
+}
+
+.sx-footer-app-icon {
+  font-size: 18px;
+}
+
+.sx-footer-app-link {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: #111111;
+  text-decoration: none;
+}
+
+.sx-footer-app-link:hover,
+.sx-footer-app-link:focus-visible {
+  text-decoration: underline;
+}
+
+/* Bottom legal row */
+.sx-footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  align-items: center;
+  font-size: 13px;
+}
+
+.sx-footer-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.sx-footer-legal-link {
+  color: #111111;
+  text-decoration: none;
+}
+
+.sx-footer-legal-link:hover,
+.sx-footer-legal-link:focus-visible {
+  text-decoration: underline;
+}
+
+.sx-footer-copy {
+  margin: 0;
+  color: #555555;
+}
+
+.sx-footer-divider {
+  color: #999999;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sx-footer-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sx-footer-col-support {
+    order: 5;
+  }
+}
+
+@media (max-width: 600px) {
+  .sx-footer-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sx-footer-app {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .sx-footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

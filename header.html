@@ -1,73 +1,117 @@
-<header class="sx-header-root">
-      <div class="sx-header-inner">
-        <div class="flex items-center space-x-3">
-          <div class="sx-logo">SiriusXM</div>
-          <span id="jsStatus" class="sx-status-pill">JS: UNKNOWN</span>
+<!-- header.html -->
+
+<div class="sx-shell">
+  <header class="sx-header">
+    <div class="sx-header-inner">
+      <!-- Logo -->
+      <a href="/" class="sx-logo">SiriusXM</a>
+
+      <!-- Primary nav -->
+      <nav class="sx-primary-nav" aria-label="Main navigation">
+        <ul class="sx-primary-list">
+          <!-- What's On -->
+          <li class="sx-primary-item sx-has-mega" data-mega="whats-on">
+            <button class="sx-primary-link" type="button">
+              <span>What’s on</span>
+              <span class="sx-underline"></span>
+            </button>
+          </li>
+
+          <!-- Discover -->
+          <li class="sx-primary-item sx-has-mega" data-mega="discover">
+            <button class="sx-primary-link" type="button">
+              <span>Discover</span>
+              <span class="sx-underline"></span>
+            </button>
+          </li>
+
+          <!-- Try SiriusXM -->
+          <li class="sx-primary-item sx-has-mega" data-mega="try">
+            <button class="sx-primary-link" type="button">
+              <span>Try SiriusXM</span>
+              <span class="sx-underline"></span>
+            </button>
+          </li>
+
+          <!-- Subscribe (no mega) -->
+          <li class="sx-primary-item">
+            <a class="sx-primary-link" href="#">
+              <span>Subscribe</span>
+              <span class="sx-underline"></span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Utility nav (right side) -->
+      <nav class="sx-utility-nav" aria-label="Utility navigation">
+        <ul class="sx-utility-list">
+          <li><a href="#" class="sx-utility-link">Listen</a></li>
+          <li><a href="#" class="sx-utility-link">Help</a></li>
+          <li><a href="#" class="sx-utility-link">FR</a></li>
+          <li><a href="#" class="sx-utility-link">My Account</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Mega menus container -->
+  <section class="sx-mega-shell" aria-label="Expanded navigation">
+    <!-- WHAT'S ON panel -->
+    <div class="sx-mega-panel" data-panel="whats-on">
+      <div class="sx-mega-inner">
+        <div class="sx-mega-column sx-mega-column-single">
+          <ul class="sx-mega-list">
+            <li><a href="#" class="sx-mega-link">What’s new</a></li>
+            <li><a href="#" class="sx-mega-link">Channel guide</a></li>
+            <li><a href="#" class="sx-mega-link">Program schedule</a></li>
+            <li><a href="#" class="sx-mega-link">Live sports schedule</a></li>
+            <li><a href="#" class="sx-mega-link">Podcasts</a></li>
+            <li><a href="#" class="sx-mega-link">Backstage</a></li>
+            <li><a href="#" class="sx-mega-link">SiriusXM blog</a></li>
+          </ul>
         </div>
-
-        <nav class="flex items-center gap-16">
-          <ul class="sx-main-nav">
-            <!-- What's On -->
-            <li class="sx-nav-item">
-              <a class="sx-main-link" href="javascript:void(0)">What’s on</a>
-              <div class="sx-mega">
-                <div class="sx-mega-inner">
-                  <div class="sx-mega-title">What’s on</div>
-                  <a class="sx-mega-link" href="#">What’s new</a>
-                  <a class="sx-mega-link" href="#">Channel guide</a>
-                  <a class="sx-mega-link" href="#">Program schedule</a>
-                  <a class="sx-mega-link" href="#">Live sports schedule</a>
-                  <a class="sx-mega-link" href="#">Podcasts</a>
-                  <a class="sx-mega-link" href="#">Backstage</a>
-                  <a class="sx-mega-link" href="#">SiriusXM blog</a>
-                </div>
-              </div>
-            </li>
-
-            <!-- Discover -->
-            <li class="sx-nav-item">
-              <a class="sx-main-link" href="javascript:void(0)">Discover</a>
-              <div class="sx-mega">
-                <div class="sx-mega-inner">
-                  <div class="sx-mega-title">Discover</div>
-                  <a class="sx-mega-link" href="#">What is SiriusXM?</a>
-                  <a class="sx-mega-link" href="#">Music</a>
-                  <a class="sx-mega-link" href="#">Sports</a>
-                  <a class="sx-mega-link" href="#">Howard Stern</a>
-                  <a class="sx-mega-link" href="#">News &amp; Issues</a>
-                  <a class="sx-mega-link" href="#">Talk &amp; Entertainment</a>
-                  <a class="sx-mega-link" href="#">Comedy</a>
-                </div>
-              </div>
-            </li>
-
-            <!-- Try SiriusXM -->
-            <li class="sx-nav-item">
-              <a class="sx-main-link" href="javascript:void(0)">Try SiriusXM</a>
-              <div class="sx-mega">
-                <div class="sx-mega-inner">
-                  <div class="sx-mega-title">Try SiriusXM</div>
-                  <a class="sx-mega-link" href="#">Free trial: In my car</a>
-                  <a class="sx-mega-link" href="#">Free trial: SiriusXM app</a>
-                  <a class="sx-mega-link" href="#">About your trial</a>
-                  <a class="sx-mega-link" href="#">Ways to listen</a>
-                  <a class="sx-mega-link" href="#">Get started</a>
-                </div>
-              </div>
-            </li>
-
-            <!-- Subscribe (no mega) -->
-            <li class="sx-nav-item">
-              <a class="sx-main-link" href="#">Subscribe</a>
-            </li>
-          </ul>
-
-          <ul class="sx-utility-nav">
-            <li><a class="sx-utility-link" href="#">LISTEN</a></li>
-            <li><a class="sx-utility-link" href="#">HELP</a></li>
-            <li><a class="sx-utility-link" href="#">FR</a></li>
-            <li><a class="sx-utility-link" href="#">MY ACCOUNT</a></li>
-          </ul>
-        </nav>
       </div>
-    </header>
+    </div>
+
+    <!-- DISCOVER panel -->
+    <div class="sx-mega-panel" data-panel="discover">
+      <div class="sx-mega-inner">
+        <div class="sx-mega-column sx-mega-column-single">
+          <ul class="sx-mega-list">
+            <li><a href="#" class="sx-mega-link">What is SiriusXM?</a></li>
+            <li><a href="#" class="sx-mega-link">Music</a></li>
+            <li><a href="#" class="sx-mega-link">Sports</a></li>
+            <li><a href="#" class="sx-mega-link">Howard Stern</a></li>
+            <li><a href="#" class="sx-mega-link">News &amp; Issues</a></li>
+            <li><a href="#" class="sx-mega-link">Talk &amp; Entertainment</a></li>
+            <li><a href="#" class="sx-mega-link">Comedy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TRY SIRIUSXM panel -->
+    <div class="sx-mega-panel" data-panel="try">
+      <div class="sx-mega-inner">
+        <div class="sx-mega-column sx-mega-column-single">
+          <ul class="sx-mega-list">
+            <li>
+              <a href="#" class="sx-mega-link">
+                Free trial: In my car + SiriusXM app
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sx-mega-link">
+                Free trial: SiriusXM app
+              </a>
+            </li>
+            <li><a href="#" class="sx-mega-link">About your trial</a></li>
+            <li><a href="#" class="sx-mega-link">Ways to listen</a></li>
+            <li><a href="#" class="sx-mega-link">Get started</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
