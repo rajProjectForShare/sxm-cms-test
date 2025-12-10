@@ -5,12 +5,12 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
 (function () {
   // Guard in case jQuery failed
   if (typeof window.jQuery === "undefined") {
-    console.error("❌ [CMS HEADER] jQuery is not available.");
+    console.error("❌ sxm-cms-test [CMS HEADER] jQuery is not available.");
     return;
   }
 
   var $ = window.jQuery;
-  console.log("✔ [CMS HEADER] jQuery version:", $.fn.jquery);
+  console.log("✔ sxm-cms-test [CMS HEADER] jQuery version:", $.fn.jquery);
 
   function closeAllPanels() {
     $(".sx-primary-item.sx-is-active").removeClass("sx-is-active");
@@ -48,5 +48,5 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
     }
   });
 
-  console.log("✅ [CMS HEADER] mega menu initialized");
+  console.log("✅ sxm-cms-test [CMS HEADER] mega menu initialized");
 })();
