@@ -2,15 +2,30 @@
 
 console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
 
-(function () {
-  // Guard in case jQuery failed
-  if (typeof window.jQuery === "undefined") {
-    console.error("❌ sxm-cms-test [CMS HEADER] jQuery is not available.");
+// Try loading jQuery once per second for 10 seconds
+(function waitForJQuery(retryCount) {
+  retryCount = retryCount || 0;
+
+  if (typeof window.jQuery !== "undefined") {
+    console.log("✔ sxm-cms-test [CMS HEADER] jQuery version:", jQuery.fn.jquery);
+    initMegaMenu(window.jQuery);
     return;
   }
 
-  var $ = window.jQuery;
-  console.log("✔ sxm-cms-test [CMS HEADER] jQuery version:", $.fn.jquery);
+  if (retryCount >= 10) {
+    console.error("❌ sxm-cms-test [CMS HEADER] jQuery not loaded after 10 seconds");
+    return;
+  }
+
+  console.warn(`⏳ sxm-cms-test [CMS HEADER] waiting for jQuery... (${retryCount + 1}/10)`);
+
+  setTimeout(function () {
+    waitForJQuery(retryCount + 1);
+  }, 1000);
+
+})();
+
+function initMegaMenu($) {
 
   function closeAllPanels() {
     $(".sx-primary-item.sx-is-active").removeClass("sx-is-active");
@@ -20,19 +35,17 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
   function openPanel(key) {
     closeAllPanels();
     if (!key) return;
-
     $('.sx-primary-item[data-mega="' + key + '"]').addClass("sx-is-active");
     $('.sx-mega-panel[data-panel="' + key + '"]').addClass("sx-open");
   }
 
-  // Click / hover handlers
+  // Hover handlers
   $(document).on("mouseenter", ".sx-primary-item.sx-has-mega", function () {
     var key = $(this).data("mega");
     openPanel(key);
   });
 
   $(document).on("mouseleave", ".sx-shell", function () {
-    // When pointer leaves the entire header shell, close
     closeAllPanels();
   });
 
@@ -49,4 +62,6 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
   });
 
   console.log("✅ sxm-cms-test [CMS HEADER] mega menu initialized");
-})();
+}
+
+is this correct?
