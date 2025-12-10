@@ -7,7 +7,7 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
   retryCount = retryCount || 0;
 
   if (typeof window.jQuery !== "undefined") {
-    console.log("✔ sxm-cms-test [CMS HEADER] jQuery version:", jQuery.fn.jquery);
+    console.log("✔ sxm-cms-test [CMS HEADER] jQuery version:", window.jQuery.fn.jquery);
     initMegaMenu(window.jQuery);
     return;
   }
@@ -17,12 +17,15 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
     return;
   }
 
-  console.warn(`⏳ sxm-cms-test [CMS HEADER] waiting for jQuery... (${retryCount + 1}/10)`);
+  console.warn(
+    "⏳ sxm-cms-test [CMS HEADER] waiting for jQuery... (" +
+      (retryCount + 1) +
+      "/10)"
+  );
 
-  setTimeout(function () {
+  window.setTimeout(function () {
     waitForJQuery(retryCount + 1);
   }, 1000);
-
 })();
 
 function initMegaMenu($) {
@@ -34,7 +37,9 @@ function initMegaMenu($) {
 
   function openPanel(key) {
     closeAllPanels();
-    if (!key) return;
+    if (!key) {
+      return;
+    }
     $('.sx-primary-item[data-mega="' + key + '"]').addClass("sx-is-active");
     $('.sx-mega-panel[data-panel="' + key + '"]').addClass("sx-open");
   }
@@ -50,10 +55,14 @@ function initMegaMenu($) {
   });
 
   // Keyboard focus support
-  $(document).on("focusin", ".sx-primary-item.sx-has-mega .sx-primary-link", function () {
-    var key = $(this).closest(".sx-primary-item").data("mega");
-    openPanel(key);
-  });
+  $(document).on(
+    "focusin",
+    ".sx-primary-item.sx-has-mega .sx-primary-link",
+    function () {
+      var key = $(this).closest(".sx-primary-item").data("mega");
+      openPanel(key);
+    }
+  );
 
   $(document).on("keydown", function (evt) {
     if (evt.key === "Escape") {
@@ -63,5 +72,3 @@ function initMegaMenu($) {
 
   console.log("✅ sxm-cms-test [CMS HEADER] mega menu initialized");
 }
-
-is this correct?
