@@ -1,6 +1,6 @@
 // header.js
 
-console.log("🚀 [CMS HEADER] script loaded");
+console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
 
 (function () {
   // Guard in case jQuery failed
