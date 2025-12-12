@@ -2,23 +2,18 @@
 
 console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
 
-// ===== Language Switch (Experience Cloud) =====
-(function initLanguageSwitcher() {
+// ===== Language Dropdown (Experience Cloud) =====
+(function initLanguageDropdown() {
   var LANG_EN = "en_US";
   var LANG_FR = "fr_CA"; // your Experience Builder shows French (Canadian)
 
   function isSalesforceExperienceHost() {
     var h = window.location.hostname || "";
-    // Adjust if needed, but this matches your site.com domain
     return h.indexOf(".my.site.com") > -1 || h.indexOf(".force.com") > -1;
   }
 
   function getUrl() {
-    try {
-      return new URL(window.location.href);
-    } catch (e) {
-      return null;
-    }
+    try { return new URL(window.location.href); } catch (e) { return null; }
   }
 
   function getCurrentSfLanguage() {
@@ -32,68 +27,61 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
     if (!url) return;
 
     url.searchParams.set("language", lang);
-    window.location.href = url.toString();
+
+    // Use assign() to force reload
+    window.location.assign(url.toString());
   }
 
-  function updateToggleLabel(currLang) {
-    var btn = document.querySelector("[data-lang-toggle]");
-    if (!btn) return;
+  function bindIfFound() {
+    var select = document.querySelector("[data-lang-select]");
+    if (!select) return false;
 
-    // show the *other* language as the clickable option
-    if (currLang === LANG_FR) {
-      btn.textContent = "EN";
-      btn.setAttribute("data-target-lang", LANG_EN);
-    } else {
-      btn.textContent = "FR";
-      btn.setAttribute("data-target-lang", LANG_FR);
-    }
-  }
+    if (select.getAttribute("data-bound") === "1") return true;
+    select.setAttribute("data-bound", "1");
 
-  function handleToggleClick(e) {
-    e.preventDefault();
-    e.stopPropagation();
-
-    var btn = e.currentTarget;
+    // Set initial selection based on current URL
     var curr = getCurrentSfLanguage() || LANG_EN;
-    var next = btn.getAttribute("data-target-lang") || (curr === LANG_FR ? LANG_EN : LANG_FR);
 
-    if (isSalesforceExperienceHost()) {
-      // ✅ Real switch inside Experience Cloud
-      setSfLanguage(next);
-    } else {
-      // ✅ GitHub Pages / WP preview: don't navigate away
-      // Just simulate switch for preview purposes
-      updateToggleLabel(next);
-      console.log("ℹ️ Preview mode: language toggled (no Salesforce redirect). Next:", next);
-    }
+    // If an unknown value comes (ex: fr_FR), fallback to EN
+    if (curr !== LANG_EN && curr !== LANG_FR) curr = LANG_EN;
+
+    select.value = curr;
+
+    select.addEventListener("change", function (e) {
+      var chosen = e.target.value;
+
+      console.log("🌐 Language selected:", chosen, "Host:", window.location.hostname);
+
+      if (isSalesforceExperienceHost()) {
+        setSfLanguage(chosen);
+      } else {
+        // Preview mode (GitHub Pages): just update selection, no redirect
+        console.log("ℹ️ Preview mode: selection changed (no Salesforce redirect).");
+      }
+    });
+
+    console.log("✅ sxm-cms-test [CMS HEADER] language dropdown bound. Current:", curr);
+    return true;
   }
 
-  // Bind once
-  function bind() {
-    var btn = document.querySelector("[data-lang-toggle]");
-    if (!btn) {
-      console.log('no button')
-      return;
-    }
-    // Prevent double-binding
-    if (btn.getAttribute("data-bound") === "1") return;
-    btn.setAttribute("data-bound", "1");
+  // CMS Connect inject timing safe-bind
+  if (bindIfFound()) return;
 
-    btn.addEventListener("click", handleToggleClick);
+  var obs = new MutationObserver(function () {
+    if (bindIfFound()) obs.disconnect();
+  });
 
-    var curr = getCurrentSfLanguage() || LANG_EN;
-    updateToggleLabel(curr);
+  obs.observe(document.documentElement, { childList: true, subtree: true });
 
-    console.log("✅ sxm-cms-test [CMS HEADER] language switch bound. Host:", window.location.hostname);
-  }
+  var tries = 0;
+  var timer = window.setInterval(function () {
+    tries++;
+    if (bindIfFound() || tries > 30) window.clearInterval(timer);
+  }, 300);
 
-  // DOM is already present in CMS fragment, but bind safely
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bind);
-  } else {
-    bind();
-  }
+  console.log("⏳ Waiting for header to render so language dropdown can bind...");
 })();
+
 
 
 
