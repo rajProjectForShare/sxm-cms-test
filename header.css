@@ -195,4 +195,34 @@
 .sx-utility-link.sx-lang-toggle:focus-visible {
   opacity: 1;
 }
+/* Language dropdown */
+.sx-lang-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sx-lang-label {
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.85;
+}
+
+.sx-lang-select {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 6px;
+  padding: 6px 10px;
+  font: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+/* dropdown options (browser controlled; limited styling) */
+.sx-lang-select option {
+  color: #000;
+}
 
