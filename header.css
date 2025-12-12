@@ -177,3 +177,22 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+
+/* Make language button look like the other utility links */
+.sx-utility-link.sx-lang-toggle {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  opacity: 0.9;
+}
+
+.sx-utility-link.sx-lang-toggle:hover,
+.sx-utility-link.sx-lang-toggle:focus-visible {
+  opacity: 1;
+}
+
