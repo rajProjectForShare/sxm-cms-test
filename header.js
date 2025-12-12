@@ -5,7 +5,13 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
 // ===== Language Switch (Experience Cloud) =====
 (function initLanguageSwitcher() {
   var LANG_EN = "en_US";
-  var LANG_FR = "fr_CA"; // based on your Builder screenshot (French Canadian)
+  var LANG_FR = "fr_CA"; // your Experience Builder shows French (Canadian)
+
+  function isSalesforceExperienceHost() {
+    var h = window.location.hostname || "";
+    // Adjust if needed, but this matches your site.com domain
+    return h.indexOf(".my.site.com") > -1 || h.indexOf(".force.com") > -1;
+  }
 
   function getUrl() {
     try {
@@ -18,10 +24,7 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
   function getCurrentSfLanguage() {
     var url = getUrl();
     if (!url) return null;
-
-    // Experience uses ?language=en_US / fr_CA
-    var q = url.searchParams.get("language");
-    return q || null;
+    return url.searchParams.get("language");
   }
 
   function setSfLanguage(lang) {
@@ -29,84 +32,67 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
     if (!url) return;
 
     url.searchParams.set("language", lang);
-
-    // optional: keep URL clean by removing any hash before reload
-    // url.hash = "";
-
     window.location.href = url.toString();
   }
 
-  function ensureLanguageOnInternalLinks(lang) {
-    // Keep language param when user clicks header links like "/"
-    var links = document.querySelectorAll(".sx-shell a[href]");
-    for (var i = 0; i < links.length; i++) {
-      var a = links[i];
-      var href = a.getAttribute("href");
-
-      if (!href) continue;
-      if (href === "#") continue;
-      if (href.indexOf("javascript:") === 0) continue;
-      if (href.indexOf("mailto:") === 0) continue;
-      if (href.indexOf("tel:") === 0) continue;
-
-      // Ignore absolute external links
-      if (href.indexOf("http://") === 0 || href.indexOf("https://") === 0) {
-        continue;
-      }
-
-      // Rewrite relative/internal URLs to preserve ?language=...
-      try {
-        var abs = new URL(href, window.location.origin);
-        abs.searchParams.set("language", lang);
-        a.setAttribute("href", abs.pathname + abs.search + abs.hash);
-      } catch (e) {
-        // ignore
-      }
-    }
-  }
-
   function updateToggleLabel(currLang) {
-    var toggle = document.getElementById("sx-lang-toggle");
-    if (!toggle) return;
+    var btn = document.querySelector("[data-lang-toggle]");
+    if (!btn) return;
 
-    // If currently French -> show EN (meaning: click to switch to English)
-    // If currently English -> show FR
+    // show the *other* language as the clickable option
     if (currLang === LANG_FR) {
-      toggle.textContent = "EN";
-      toggle.setAttribute("data-target-lang", LANG_EN);
+      btn.textContent = "EN";
+      btn.setAttribute("data-target-lang", LANG_EN);
     } else {
-      toggle.textContent = "FR";
-      toggle.setAttribute("data-target-lang", LANG_FR);
+      btn.textContent = "FR";
+      btn.setAttribute("data-target-lang", LANG_FR);
     }
   }
 
-  document.addEventListener("click", function (e) {
-    var el = e.target;
+  function handleToggleClick(e) {
+    e.preventDefault();
+    e.stopPropagation();
 
-    // If user clicks inside the <a> (span etc.), bubble up to the anchor
-    while (el && el !== document && el.tagName !== "A") {
-      el = el.parentNode;
-    }
+    var btn = e.currentTarget;
+    var curr = getCurrentSfLanguage() || LANG_EN;
+    var next = btn.getAttribute("data-target-lang") || (curr === LANG_FR ? LANG_EN : LANG_FR);
 
-    if (!el || el === document) return;
-
-    if (el.id === "sx-lang-toggle") {
-      e.preventDefault();
-
-      var curr = getCurrentSfLanguage();
-      var next = el.getAttribute("data-target-lang") || (curr === LANG_FR ? LANG_EN : LANG_FR);
-
+    if (isSalesforceExperienceHost()) {
+      // ✅ Real switch inside Experience Cloud
       setSfLanguage(next);
+    } else {
+      // ✅ GitHub Pages / WP preview: don't navigate away
+      // Just simulate switch for preview purposes
+      updateToggleLabel(next);
+      console.log("ℹ️ Preview mode: language toggled (no Salesforce redirect). Next:", next);
     }
-  });
+  }
 
-  // Init on load
-  var current = getCurrentSfLanguage() || LANG_EN; // default fallback
-  updateToggleLabel(current);
-  ensureLanguageOnInternalLinks(current);
+  // Bind once
+  function bind() {
+    var btn = document.querySelector("[data-lang-toggle]");
+    if (!btn) return;
 
-  console.log("✅ sxm-cms-test [CMS HEADER] language switch initialized:", current);
+    // Prevent double-binding
+    if (btn.getAttribute("data-bound") === "1") return;
+    btn.setAttribute("data-bound", "1");
+
+    btn.addEventListener("click", handleToggleClick);
+
+    var curr = getCurrentSfLanguage() || LANG_EN;
+    updateToggleLabel(curr);
+
+    console.log("✅ sxm-cms-test [CMS HEADER] language switch bound. Host:", window.location.hostname);
+  }
+
+  // DOM is already present in CMS fragment, but bind safely
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", bind);
+  } else {
+    bind();
+  }
 })();
+
 
 
 // Try loading jQuery once per second for 10 seconds
