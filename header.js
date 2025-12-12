@@ -71,8 +71,10 @@ console.log("sxm-cms-test 🚀 [CMS HEADER] script loaded");
   // Bind once
   function bind() {
     var btn = document.querySelector("[data-lang-toggle]");
-    if (!btn) return;
-
+    if (!btn) {
+      console.log('no button')
+      return;
+    }
     // Prevent double-binding
     if (btn.getAttribute("data-bound") === "1") return;
     btn.setAttribute("data-bound", "1");
